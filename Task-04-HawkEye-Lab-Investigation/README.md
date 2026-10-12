@@ -12,6 +12,8 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 4. Extracted the downloaded archive.
 5. Opened the `stealer.pcap` file in Wireshark for network traffic analysis.
 
+![Login](Evidence/01-Login.png)
+
 ## 3. Tools Used
 
 - **Wireshark:** Analyzed network packets, DNS queries, HTTP traffic, and SMTP communication.
@@ -26,8 +28,6 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 **Answer:** `4003`
 
 **Analysis:** Statistics → Capture File Properties → Checked the total packet count.
-
-![Login](Evidence/01-Login.png)
 
 ![Q1 - Packets](Evidence/Q1-Packets.png)
 
@@ -205,7 +205,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 ### Q24. Every how many minutes does the collected data get exfiltrated?
 
-**Answer:** `10 minutes`
+**Answer:** `10`
 
 **Analysis:** Applied the `smtp.response.code == 220` filter → Checked SMTP packet timestamps → Compared the intervals.
 
