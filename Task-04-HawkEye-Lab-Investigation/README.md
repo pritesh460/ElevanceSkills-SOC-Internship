@@ -1,4 +1,6 @@
-# HawkEye Lab: Network Traffic Analysis
+<h1 align="center">
+#HawkEye Lab: Network Traffic Analysis
+</h1>
 
 ## 1. Objective
 
@@ -41,6 +43,8 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `01:03:41`
 
+**Analysis:** Statistics → Capture File Properties → Checked the capture duration.
+
 ![Q3 - Duration](Evidence/Q3-Duration.png)
 
 ### Q4. What is the most active computer at the link level?
@@ -79,7 +83,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `BEIJING-5CD1-PC`
 
-**Analysis:** Applied the DHCP filter → Checked the DHCP packet details → Identified the hostname.
+**Analysis:** Applied the `dhcp` filter → Checked the DHCP packet details → Identified the hostname.
 
 ![Q8 - Computer Name](Evidence/Q8-Computer_Name.png)
 
@@ -87,7 +91,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `10.4.10.4`
 
-**Analysis:** Applied the DNS filter → Checked DNS packets → Identified the DNS server IP.
+**Analysis:** Applied the `dns` filter → Checked DNS packets → Identified the DNS server IP.
 
 ![Q9 - DNS IP](Evidence/Q9-DNS_IP.png)
 
@@ -95,7 +99,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `proforma-invoices.com`
 
-**Analysis:** Applied the `frame.number == 204` filter → Checked the DNS query → Found the domain name.
+**Analysis:** Applied the `frame.number == 204` filter → Checked the DNS query → Identified the domain name.
 
 ![Q10 - Domain](Evidence/Q10-Domain.png)
 
@@ -135,7 +139,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `71826ba081e303866ce2a2534491a2f7`
 
-**Analysis:** Used the terminal `md5sum` command → Calculated the MD5 hash.
+**Analysis:** Used the terminal `md5sum` command → Calculated the MD5 hash of the downloaded file.
 
 ![Q15 - MD5](Evidence/Q15-MD5.png)
 
@@ -151,7 +155,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `173.66.146.112`
 
-**Analysis:** Checked HTTP response traffic → Followed the HTTP stream → Found the public IP address.
+**Analysis:** Examined the relevant HTTP traffic → Followed the TCP stream → Identified the public IP address reported in the response.
 
 ![Q17 - Public IP](Evidence/Q17-Public_IP.png)
 
@@ -159,7 +163,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `United States`
 
-**Analysis:** Applied the SMTP filter → Identified the email server IP → Checked the country using AbuseIPDB.
+**Analysis:** Applied the `smtp` filter → Identified the email server IP address → Checked the associated country using AbuseIPDB.
 
 ![Q18 - Email Country](Evidence/Q18-Email_Country.png)
 
@@ -175,7 +179,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `sales.del@macwinlogistics.in`
 
-**Analysis:** Followed the SMTP TCP stream → Checked the recipient email address.
+**Analysis:** Followed the SMTP TCP stream → Checked the `RCPT TO` field → Identified the recipient email address.
 
 ![Q20 - Email](Evidence/Q20-Email.png)
 
@@ -183,7 +187,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `Sales@23`
 
-**Analysis:** Followed the TCP stream → Decoded Base64 authentication data using CyberChef.
+**Analysis:** Followed the TCP stream → Decoded the Base64-encoded authentication data using CyberChef → Identified the password.
 
 ![Q21 - Password](Evidence/Q21-Password.png)
 
@@ -191,7 +195,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `Reborn v9`
 
-**Analysis:** Followed the TCP stream → Decoded Base64 email content using CyberChef → Identified the malware variant.
+**Analysis:** Followed the TCP stream → Decoded the Base64-encoded email content using CyberChef → Identified the malware variant.
 
 ![Q22 - Malware Variant](Evidence/Q22-Malware_Variant.png)
 
@@ -199,7 +203,7 @@ The objective of this lab was to investigate the HawkEye challenge from CyberDef
 
 **Answer:** `roman.mcguire:P@ssw0rd$`
 
-**Analysis:** Followed the TCP stream → Decoded email content → Examined the Bank of America data → Found the access credentials.
+**Analysis:** Followed the TCP stream → Decoded the email content using CyberChef → Examined the Bank of America data → Identified the access credentials.
 
 ![Q23 - Bank Credentials](Evidence/Q23-Bank_Credentials.png)
 
