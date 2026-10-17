@@ -1,118 +1,93 @@
-# Blue Team Report&#x20;
+# Red Team Report
 
 ## 1. Executive Summary
 
-The HawkEye Lab investigation focused on analyzing network traffic using Wireshark to identify a phishing-related malware infection and investigate potential credential theft and data exfiltration.
+This report analyzes the HawkEye Keylogger lab using Wireshark and the captured network traffic. The investigation identified a suspicious executable download and SMTP messages containing password-log information associated with HawkEye Reborn v9.
 
-The analysis revealed a suspicious domain, an executable downloaded over HTTP, and SMTP messages containing collected password logs associated with HawkEye Reborn v9. These findings indicate potential exposure of sensitive information.
+The findings indicate potential credential theft and data exfiltration. However, further endpoint investigation is required to confirm malware execution and establish the complete attack chain.
 
-**Incident Severity:** High
+## 2. Objectives
 
-## 2. Incident Details
+- Analyze potential initial access and malware delivery.
+- Identify evidence of credential theft and information collection.
+- Investigate possible email-based data exfiltration.
+- Document indicators of compromise (IoCs).
+- Evaluate attack opportunities and security weaknesses from a Red Team perspective.
 
-| Field               | Details                 |
-| ------------------- | ----------------------- |
-| Affected Host       | BEIJING-5CD1-PC         |
-| Operating System    | Windows NT 6.1          |
-| Internal IP Address | `10.4.10.132`           |
-| DNS Server          | `10.4.10.4`             |
-| Suspicious Domain   | `proforma-invoices.com` |
-| External IP Address | `217.182.138.150`       |
-| Downloaded File     | `tkraw_Protected99.exe` |
-| Analysis Tool       | Wireshark               |
-| Malware Identified  | HawkEye Reborn v9       |
+## 3. Lab Environment
 
-## 3. Detection and Initial Findings
+| Item             | Details           |
+| ---------------- | ----------------- |
+| Analysis tool    | Wireshark         |
+| Target hostname  | `BEIJING-5CD1-PC` |
+| Internal IP      | `10.4.10.132`     |
+| Operating system | Windows NT 6.1    |
 
-The investigation identified the following suspicious activities in the captured network traffic:
+## 4. Attack Analysis
 
-- **Suspicious DNS activity:** The victim queried `proforma-invoices.com`, which resolved to `217.182.138.150`.
-- **Malware delivery:** The victim requested `tkraw_Protected99.exe` from the external server over HTTP.
-- **Successful download response:** The server returned HTTP `200 OK` for the executable.
-- **Credential exposure in SMTP messages:** SMTP messages contained password logs and browser and email account information.
-- **Data exfiltration:** Two captured SMTP messages indicated repeated transmission of collected information.
+### 4.1 Initial Access and Payload Delivery
 
-These findings are consistent with the HawkEye phishing scenario, in which a malicious executable is used to collect sensitive information and transmit it to an external destination.
+The network capture showed a DNS query for `proforma-invoices.com`, resolving to `217.182.138.150`. The target then requested `tkraw_Protected99.exe` over HTTP, and the server returned `200 OK`.
 
-## 4. Incident Timeline
+From a Red Team perspective, a suspicious executable delivered through an invoice-themed lure could provide an initial access opportunity if a user executes it. However, the PCAP confirms the download activity, not execution or the precise delivery method.
 
-The timeline is based on the provided Wireshark evidence. Packet timestamps are in UTC, while SMTP timestamps are taken from the email `Date` headers.
+### 4.2 Credential Theft
 
-| Timestamp (UTC) | Event                                                  |
-| --------------- | ------------------------------------------------------ |
-| 20:37:53        | DNS query for `proforma-invoices.com`.                 |
-| 20:37:54        | DNS response resolved the domain to `217.182.138.150`. |
-| 20:37:54        | HTTP request for `tkraw_Protected99.exe`.              |
-| 20:37:56        | Server returned HTTP `200 OK` for the executable.      |
-| 20:38:08        | First SMTP message containing a password log.          |
-| 20:48:18        | Second SMTP message containing a password log.         |
+SMTP messages in the capture contained password-log information associated with HawkEye Reborn v9.
 
-The two SMTP message dates are approximately 10 minutes and 10 seconds apart, indicating repeated reporting of collected information.
+This indicates potential exposure of credentials and sensitive account information. Such information could be abused to access affected accounts if the credentials remain valid. Additional endpoint evidence is required to confirm how the information was collected.
 
-## 5. Technical Investigation and Analysis
+### 4.3 Potential Data Exfiltration
 
-### 5.1 Attack Classification
+Two SMTP messages containing password-log information were identified at separate times. This activity is consistent with potential email-based data exfiltration.
 
-The HawkEye Lab represents a **phishing-initiated malware attack** involving HawkEye Keylogger – Reborn v9, an information-stealing malware variant. Its observed behavior is consistent with credential harvesting and SMTP-based data exfiltration.
+The original SMTP streams should be examined to verify message contents, recipients, timestamps, and whether the transfers were unauthorized.
 
-### 5.2 Phishing and Malware Delivery
+## 5. Attack Timeline
 
-The lab scenario describes an invoice-themed phishing lure containing a download link. The captured traffic shows the victim requesting `tkraw_Protected99.exe` from `217.182.138.150` over HTTP. The server returned `200 OK`, confirming a successful response to the file request.
+| Time (UTC) | Observed activity                        |
+| ---------- | ---------------------------------------- |
+| 20:37:53   | DNS query for `proforma-invoices.com`    |
+| 20:37:54   | Domain resolved to `217.182.138.150`     |
+| 20:37:54   | HTTP request for `tkraw_Protected99.exe` |
+| 20:38:15   | HTTP server returned `200 OK`            |
+| 20:38:16   | First recorded password-log email event  |
+| 20:48:20   | Second recorded password-log email event |
 
-### 5.3 Credential Theft and Data Exfiltration
+## 6. Indicators of Compromise (IoCs)
 
-The captured SMTP messages contained password logs identified with HawkEye Reborn v9, including browser and email account information. This indicates that sensitive information was transmitted through email.
+| Indicator          | Value                              |
+| ------------------ | ---------------------------------- |
+| Domain             | `proforma-invoices.com`            |
+| External IP        | `217.182.138.150`                  |
+| Executable         | `tkraw_Protected99.exe`            |
+| MD5 hash           | `71826ba081e303866ce2a2534491a2f7` |
+| Target hostname    | `BEIJING-5CD1-PC`                  |
+| Internal IP        | `10.4.10.132`                      |
+| SMTP software      | Exim 4.91                          |
+| Associated malware | HawkEye Reborn v9                  |
 
-Two captured message `Date` headers were approximately 10 minutes and 10 seconds apart. This is consistent with repeated exfiltration activity; however, the two messages alone do not establish a regular transmission schedule.
+## 7. Red Team Findings
 
-**Attack Flow:**
-Phishing lure → Executable download → Credential collection → SMTP-based data exfiltration
+The investigation highlights the following potential attack opportunities:
 
-## 6. Indicators of Compromise (IOCs)
+- **Payload delivery:** A suspicious executable was requested over HTTP.
+- **Credential exposure:** Password-log information was present in SMTP messages.
+- **Data exfiltration:** Email traffic may have been used to transfer sensitive information.
+- **Security control assessment:** The activity provides a basis for testing endpoint protection, credential security, and outbound traffic monitoring.
 
-| Indicator Type         | Value                            |
-| ---------------------- | -------------------------------- |
-| Suspicious Domain      | `proforma-invoices.com`          |
-| External IP Address    | `217.182.138.150`                |
-| Executable             | `tkraw_Protected99.exe`          |
-| MD5 Hash               | 71826ba081e303866ce2a2534491a2f7 |
-| Victim IP Address      | `10.4.10.132`                    |
-| SMTP Server Software   | Exim 4.91                        |
-| Malware Identification | HawkEye Reborn v9                |
+The available evidence does not independently confirm persistence, privilege escalation, lateral movement, or successful unauthorized account access.
 
-## **7. Impact Assessment**
+## 8. Recommendations
 
-The captured network traffic indicates that sensitive browser and email account information was included in SMTP messages associated with HawkEye Reborn v9.
+- Investigate the executable's origin and execution history.
+- Validate the malware identification and file hash.
+- Examine the SMTP messages and determine whether the transfers were authorized.
+- Assess the potential impact of exposed credentials.
+- Review endpoint protection, email security, and outbound traffic monitoring controls.
 
-- **Potential data exposure:** Account credentials and related information may have been compromised.
-- **Affected endpoint:** `BEIJING-5CD1-PC` (`10.4.10.132`).
-- **Potential risk:** Unauthorized account access and further compromise if exposed credentials remain valid.
-- **Investigation limitation:** The PCAP does not establish the full extent of endpoint compromise or whether the credentials were successfully misused.
+## 9. Conclusion
 
+The HawkEye Lab investigation identified a suspicious executable download and SMTP messages containing password-log information associated with HawkEye Reborn v9. These findings support a potential attack scenario involving malware delivery, credential theft, and email-based data exfiltration.
 
-
-## 8. Containment, Eradication, and Recovery Recommendations
-
-The following actions are recommended for a real-world incident:
-
-1. **Isolate the affected endpoint** to prevent further suspicious communication.
-2. **Preserve forensic evidence**, including the PCAP, executable, and relevant system and email logs.
-3. **Block verified malicious indicators** using firewall, DNS, and web-filtering controls.
-4. **Reset exposed credentials** and revoke affected sessions where appropriate.
-5. **Investigate the endpoint** for malware execution, persistence, and additional compromise.
-6. **Review network and email logs** to identify other affected systems and potential data exposure.
-
-## 9. Security Recommendations
-
-- Strengthen email filtering and scan attachments before delivery.
-- Educate users to verify unexpected invoice attachments and suspicious senders.
-- Deploy EDR to detect malicious executable activity and suspicious processes.
-- Monitor unusual DNS queries and outbound HTTP/SMTP connections.
-- Use multifactor authentication to reduce the risk from stolen credentials.
-- Integrate endpoint, DNS, firewall, and email logs into a SIEM for correlated detection.
-
-## 10. Conclusion
-
-The HawkEye Lab investigation identified network activity consistent with a phishing-related malware incident involving HawkEye Reborn v9. The key findings included a suspicious domain resolution, an executable download over HTTP, and SMTP messages containing sensitive account information.
-
-The investigation demonstrates how Blue Team analysts use Wireshark to identify indicators of compromise, reconstruct suspicious activity, assess potential credential exposure, and recommend containment and monitoring improvements.
+From a Red Team perspective, the lab demonstrates how an attacker could potentially exploit weaknesses in payload delivery defenses, credential protection, and outbound traffic monitoring. Further endpoint and mail-server evidence is required to confirm execution, causality, and the full extent of compromise.
