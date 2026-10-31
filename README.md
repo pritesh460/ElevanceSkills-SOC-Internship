@@ -1,4 +1,3 @@
-```markdown
 <div align="center">
 
 # ElevanceSkills SOC Analyst Internship
@@ -129,4 +128,3 @@ SOC Analyst | Cybersecurity Enthusiast
 ---
 
 **Disclaimer:** All documented activities were performed for educational purposes in authorized lab environments.
-```
