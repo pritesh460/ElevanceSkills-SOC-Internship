@@ -34,38 +34,37 @@ The internship focused on hands-on cybersecurity activities covering Red Team, B
 
 ## Project Overview
 
-### Task 01 – Red Team | Blue Team | Purple Team [Task 01 – HawkEye Red/Blue/Purple](./Task-01-HawkEye-Red-Blue-Purple/)
-## Internship Projects
+### [Task 01 – HawkEye Red/Blue/Purple Team](./Task-01-HawkEye-Red-Blue-Purple/)
 - Analyzed the HawkEye security lab.
 - Prepared offensive and defensive security reports.
 - Documented attack techniques, IoCs, and MITRE ATT&CK mappings.
 - Created a Purple Team handover report.
 
-### Task 02 – ELK Correlation Rules [Task 02 – ELK Correlation Rules](./Task-02-ELK-Correlation-Rules/)
+### [Task 02 – ELK Correlation Rules](./Task-02-ELK-Correlation-Rules/)
 - Configured Elasticsearch and Kibana.
 - Developed custom detection rules using KQL.
 - Tested brute-force, DNS tunneling, and suspicious PowerShell activity.
 - Validated generated SIEM alerts.
 
-### Task 03 – Multi-Stage APT Simulation [Task 03 – Multi-Stage APT](./Task-03-Multi-Stage-APT/)
+### [Task 03 – Multi-Stage APT Simulation](./Task-03-Multi-Stage-APT/)
 - Simulated multi-stage attack activities in a lab environment.
 - Investigated suspicious events and correlated security logs.
 - Analyzed IoCs and documented attack timelines.
 - Worked with threat intelligence, YARA, Sigma, and mitigation concepts.
 
-### Task 04 – CyberDefenders HawkEye Investigation [Task 04 – HawkEye Investigation](./Task-04-HawkEye-Lab-Investigation/)
+### [Task 04 – HawkEye Investigation](./Task-04-HawkEye-Lab-Investigation/)
 - Analyzed network traffic using Wireshark.
 - Investigated suspicious communications and malware indicators.
 - Extracted file hashes and network IoCs.
 - Documented the investigation and findings.
 
-### Task 05 – HTB Brutus Investigation [Task 05 – HTB Brutus](./Task-05-HTB-Brutus/)
+### [Task 05 – HTB Brutus Investigation](./Task-05-HTB-Brutus/)
 - Analyzed Linux authentication logs.
 - Investigated SSH brute-force attempts.
 - Identified compromised account activity.
 - Reconstructed the attack timeline and documented findings.
 
-### Task 06 – Custom SIEM Dashboard [Task 06 – SIEM Dashboard](./Task-06-SIEM-Dashboard/)
+### [Task 06 – Custom SIEM Dashboard](./Task-06-SIEM-Dashboard/)
 - Designed a security monitoring dashboard using Kibana.
 - Created visualizations for authentication failures and security events.
 - Monitored brute-force attempts, DNS activity, and suspicious PowerShell execution.
