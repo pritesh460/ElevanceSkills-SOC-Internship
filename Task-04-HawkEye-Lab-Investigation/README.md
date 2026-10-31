@@ -1,5 +1,5 @@
 <h1 align="center">
-#HawkEye Lab: Network Traffic Analysis
+HawkEye Lab: Network Traffic Analysis
 </h1>
 
 ## 1. Objective
