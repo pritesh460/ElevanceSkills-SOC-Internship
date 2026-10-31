@@ -273,7 +273,7 @@ The SIEM testing confirmed that the configured detection rules generated alerts 
 
 ## 12. Kibana Detection Results
 
-![Kibana Detection Rules and Generated Alerts](screenshots/01-Kibana-Detection-Rules-and-Alerts.png)
+![Kibana Detection Rules and Generated Alerts](Evidence/01-Kibana-Detection-Rules.png)
 
 The configured Kibana detection rules generated alerts for the following test activities:
 
