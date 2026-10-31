@@ -122,9 +122,8 @@ I would like to thank **ElevanceSkills Technology Private Limited** for providin
 
 SOC Analyst | Cybersecurity Enthusiast
 
-- GitHub: [pritesh460](https://github.com/pritesh460)
-- Repository: [ElevanceSkills-SOC-Internship](https://github.com/pritesh460/ElevanceSkills-SOC-Internship)
-
+- **GitHub:** [pritesh460](https://github.com/pr itesh460)
+- **LinkedIn:** [Connect with me](https://www.linkedin.com/in/pr itesh-kalsariya-4529a833b/)
+- **Internship Repository:** [ElevanceSkills SOC Internship](https://github.com/pr itesh460/ElevanceSkills-SOC-Internship)
+- **Google Drive:** [View Internship Reports](https://drive.google.com/drive/folders/1yNsC8Ef7BXo6Yjo7WfBmbQ2Vk-3QQ7Al?usp=drive_link)
 ---
-
-**Disclaimer:** All documented activities were performed for educational purposes in authorized lab environments.
